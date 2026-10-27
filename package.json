@@ -1,0 +1,28 @@
+{
+  "name": "metricsflow",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "frontend"
+  ],
+  "engines": {
+    "node": ">=24.14.0"
+  },
+  "scripts": {
+    "dev": "npm run dev --workspace frontend",
+    "build": "npm run build --workspace frontend",
+    "typecheck": "npm run typecheck --workspace frontend",
+    "lint": "npm run lint --workspace frontend",
+    "test": "npm run test --workspace frontend",
+    "test:coverage": "npm run test:coverage --workspace frontend",
+    "e2e": "playwright test",
+    "portfolio": "playwright test -c playwright.portfolio.config.ts",
+    "format": "npm run format --workspace frontend",
+    "format:check": "npm run format:check --workspace frontend"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.1",
+    "@axe-core/playwright": "4.14.0",
+    "jsdom": "26.1.0"
+  }
+}

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<defs><linearGradient id="b" x2="1" y2="1"><stop stop-color="#f7f9fc"/><stop offset="1" stop-color="#eaf0fc"/></linearGradient></defs>
+<rect width="1200" height="630" fill="url(#b)"/><rect x="55" y="55" width="1090" height="520" rx="28" fill="white" stroke="#dde5f2"/>
+<rect x="105" y="107" width="55" height="55" rx="14" fill="#2964e8"/><path d="m117 143 10-11 9 4 13-16m-30 28v-7m11 7v-11m11 11v-15m10 15v-22" stroke="#fff" fill="none" stroke-width="3" stroke-linecap="round"/>
+<g font-family="Arial,sans-serif"><text x="177" y="146" font-size="34" font-weight="700" fill="#202938">MetricsFlow.</text><text x="105" y="274" font-size="62" font-weight="700" letter-spacing="-2" fill="#202938">Your business.</text><text x="105" y="347" font-size="62" font-weight="700" letter-spacing="-2" fill="#2964e8">In perspective.</text><text x="108" y="403" font-size="24" fill="#59677e">Subscription intelligence, made clear.</text><text x="108" y="507" font-size="19" fill="#59677e">CUSTOMERS · SUBSCRIPTIONS · REVENUE</text></g>
+<g transform="translate(790 225)"><rect width="240" height="235" rx="18" fill="#f7f9fc" stroke="#e7ebf1"/><path d="M25 185C65 170 68 153 100 150S150 120 166 96s30-24 49-48" stroke="#2964e8" stroke-width="5" fill="none"/><path d="M25 192H217M25 135H217M25 78H217" stroke="#dce5f4" stroke-dasharray="4 5"/><circle cx="215" cy="48" r="7" fill="#2964e8"/></g>
+</svg>
