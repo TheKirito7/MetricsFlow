@@ -1,0 +1,18 @@
+-r requirements.lock
+ast_serialize==0.13.1
+coverage==7.17.0
+httpcore2==2.16.0
+httpx2==2.16.0
+iniconfig==2.3.1
+librt==0.16.0
+mypy==2.4.0
+mypy_extensions==1.1.0
+packaging==26.3
+pathspec==1.1.1
+pluggy==1.7.0
+Pygments==2.21.0
+pytest==9.1.1
+pytest-cov==7.1.0
+ruff==0.17.3
+truststore==0.10.5
+types-PyYAML==6.0.12.20260906
