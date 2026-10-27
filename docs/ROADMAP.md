@@ -27,7 +27,7 @@ Checked items represent implemented behavior with automated or local runtime ver
 - [x] Verify regenerated screenshots and one-minute product tour.
 - [x] Architecture/API/metric/deployment documentation and engineering case study.
 - [x] MIT license, security policy, runtime versions, dependency and CodeQL workflows.
-- [ ] Publish logical commits to GitHub and verify hosted CI.
+- [x] Publish logical commits to GitHub and verify [hosted CI](https://github.com/TheKirito7/MetricsFlow/actions/runs/40563875603) and [CodeQL](https://github.com/TheKirito7/MetricsFlow/actions/runs/40563875612).
 - [ ] Deploy to a Docker host with managed PostgreSQL; verify HTTPS and viewer access.
 
 ## Next product work

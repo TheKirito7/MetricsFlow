@@ -34,6 +34,16 @@ Financial tests cover annual normalization, boundary dates, churn cohorts, zero 
 
 Portfolio media has a separate database and read-only process. It starts from a fresh three-year seed, asserts complete comparison history and the absence of test-created records, then captures eight views and a one-minute video. Business workflow tests never write portfolio images.
 
+| Verification               | Result                                               |
+| -------------------------- | ---------------------------------------------------- |
+| PostgreSQL backend suite   | 53 tests; 89.62% combined statement/branch coverage  |
+| Frontend suite             | 35 tests; 85.43% line coverage                       |
+| Browser business workflows | 12 passing Chromium workflows                        |
+| Portfolio media            | Eight clean screenshots; 62-second WebM tour         |
+| Static checks              | Strict TypeScript, mypy, ESLint, Ruff and formatting |
+
+Reports and hosted results are available in [GitHub Actions](https://github.com/TheKirito7/MetricsFlow/actions).
+
 ## Tradeoffs
 
 Reporting uses a fixed number of scoped queries and buckets historical records in memory. That keeps the definitions readable at this dataset size; database aggregates should follow measured growth. CSV exports are bounded to 50,000 records and explain how to narrow filters. Immediate cancellation provides a clear, tested effective boundary.
