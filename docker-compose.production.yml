@@ -1,0 +1,63 @@
+# Standalone production topology. Supply .env.production through --env-file.
+# Put HTTPS at the nginx edge; see docs/DEPLOYMENT.md for an upstream TLS terminator.
+services:
+  db:
+    profiles: [local-database]
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:?Set POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set a production database password}
+      POSTGRES_DB: ${POSTGRES_DB:?Set POSTGRES_DB}
+    volumes: ['postgres_data:/var/lib/postgresql/data']
+    networks: [private]
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}']
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  backend:
+    build: ./backend
+    environment:
+      DATABASE_URL: ${DATABASE_URL:?Set the private production PostgreSQL DSN}
+      APP_ENV: production
+      COOKIE_SECURE: 'true'
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:?Set the exact HTTPS browser origin}
+      FORWARDED_ALLOW_IPS: 172.30.0.10
+      READ_ONLY_DEMO: ${READ_ONLY_DEMO:-false}
+      SESSION_HOURS: ${SESSION_HOURS:-8}
+      DEMO_VIEWER_EMAIL: ${DEMO_VIEWER_EMAIL:-demo@example.com}
+      DEMO_PASSWORD: ${DEMO_PASSWORD:-}
+    networks: [private]
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'python',
+          '-c',
+          "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/v1/health')",
+        ]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    # Run migrations as a separate release job before starting/scaling the API.
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+      target: production
+      args:
+        VITE_PUBLIC_SITE_URL: ${PUBLIC_SITE_URL:?Set the public HTTPS site URL}
+        VITE_DEMO_EMAIL: ${PUBLIC_DEMO_EMAIL:-}
+        VITE_DEMO_PASSWORD: ${PUBLIC_DEMO_PASSWORD:-}
+    ports: ['127.0.0.1:8080:80']
+    volumes: ['./frontend/nginx.host-tls.conf:/etc/nginx/trusted-edge.conf:ro']
+    networks:
+      private: { ipv4_address: 172.30.0.10 }
+    depends_on:
+      backend: { condition: service_healthy }
+networks:
+  private:
+    ipam:
+      config: [{ subnet: 172.30.0.0/24 }]
+volumes:
+  postgres_data:
